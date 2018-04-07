@@ -1,0 +1,25 @@
+extends layout
+block content
+  h1(style="text-align:center") Update Medicine Page
+  form(id='form', method='post', action='/editmedicine/#{medicine.medicineId}')
+    div.form-group
+      label(for='name') Name
+      input.form-control(type='text', id='name', name='name', value='#{medicine.name}')
+    div.form-group
+      label(for='manufacturer') Manufacture
+      input.form-control(type='text', id='manufacturer', name='manufacturer',  value='#{medicine.manufacturer}')
+    div.form-group
+      label(for='batchNo') Batch No.
+      input.form-control(type='text', id='batchNo', name='batchNo',  value='#{medicine.batchNo}')
+    div.form-group
+      label(for='expirationDate') Expiration Date
+      input.form-control(type='text', id='expirationDate', name='expirationDate',  value='#{medicine.expirationDate}')
+    div.form-group
+      label(for='price') Price
+      input.form-control(type='text', id='price', name='price',  value='#{medicine.price}')
+    div.form-group
+      label(for='type') Type
+      select.form-control(type='text', id='type', name='type')
+        each t in types
+          option(value=t, selected=medicine.type === t ? true : false) #{t}
+    input.btn.btn-info(type='submit', value='Update Medicine')

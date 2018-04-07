@@ -1,0 +1,25 @@
+extends layout
+block content
+  h1(style="text-align:center") Add Medicine Page
+  form(id='form', method='post', action='/addmedicine')
+    div.form-group
+      label(for='name') Name
+      input.form-control(type='text', id='name', name='name')
+    div.form-group
+      label(for='manufacturer') Manufacture
+      input.form-control(type='text', id='manufacturer', name='manufacturer')
+    div.form-group
+      label(for='batchNo') Batch No.
+      input.form-control(type='text', id='batchNo', name='batchNo')
+    div.form-group
+      label(for='expirationDate') Expiration Date
+      input.form-control(type='text', id='expirationDate', name='expirationDate')
+    div.form-group
+      label(for='price') Price
+      input.form-control(type='text', id='price', name='price')
+    div.form-group
+      label(for='type') Type
+      select.form-control(type='text', id='type', name='type')
+        each t in types
+          option(value=t) #{t}
+    input.btn.btn-info(type='submit', value='Add Medicine')
