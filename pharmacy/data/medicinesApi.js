@@ -12,16 +12,16 @@ var MedicinesApi = {
 	getAllMedicines: function(callback) {
 		callback(null, _clone(medicines));
 	},
-    getMedicineById: function(id, callback) {
-            var medicine = _.find(medicines, {medicineId: parseInt(id)});
-            callback (null, _clone(medicine));
-    },
-    updateMedicineById: function(id, medicine, callback) {
-                var existingMedicineIndex = _.indexOf(medicines, _.find(medicines, {medicineId: parseInt(id)}));
-                medicine.medicineId = parseInt(id);
-                medicines.splice(existingMedicineIndex, 1, medicine);
-                callback (null);
-    },
+  getMedicineById: function(id, callback) {
+    var medicine = _.find(medicines, {medicineId: parseInt(id)});
+    callback (null, _clone(medicine));
+  },
+  updateMedicineById: function(id, medicine, callback) {
+    var existingMedicineIndex = _.indexOf(medicines, _.find(medicines, {medicineId: parseInt(id)}));
+    medicine.medicineId = parseInt(id);
+    medicines.splice(existingMedicineIndex, 1, medicine);
+    callback (null);
+  },
 	saveMedicine: function(medicine, callback) {
 		currentID = currentID + 1;
     medicine.medicineId = currentID;
@@ -34,24 +34,19 @@ var MedicinesApi = {
   },
 
   deleteMultipleMedicines: function(idArray, callback) {
-    let meds = getAllMedicines();
-    for (let i=0; i<idArray.length; i++)
-        {
-            for (let j = 0; j < meds.length; j++) {
-                if (meds[j].medicineId == parseInt(idArray[i])) {
-                    console.log("test");
-                    _.remove(medicines, { medicineId: parseInt(idArray[i])});
-                }
-            }
-        }
-    //_.remove(medicines, { medicineId: parseInt(id)});
+    if(idArray.constructor === Array)
+    {
+      idArray.forEach(function(id){
+          _.remove(medicines, { medicineId: parseInt(id)});
+      });
+    }
+    else{
+      _.remove(medicines, { medicineId: parseInt(idArray)});
+    }
+
     callback(null);
-	}
+  }
   
-/*  deleteMultipleMedicines: function(id[], callback) {
-		//_.remove(medicines, { medicineId: parseInt(id)});
-    callback(null);
-	} */
 };
 
 module.exports = MedicinesApi;

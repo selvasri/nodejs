@@ -5,10 +5,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
   MedicineApi.getAllMedicines(function(err, items){
-    res.render('medicines', {title: 'Pharmacy app', medicines: items, "idArray":[]})
-  });
-  //res.render('medicines', { title: 'Express' });
-  
+    res.render('medicines', {title: 'Pharmacy app', medicines: items})
+  });  
 });
 
 router.get('/addmedicine', function(req, res) {
@@ -48,25 +46,20 @@ router.post('/editmedicine/:id', function(req, res) {
   });
 });
 
-
 router.get('/deletemedicine/:id', function(req, res) {
   MedicineApi.deleteMedicineById(req.params.id, function(err) {
     res.redirect('/');
   });
 });
 
-router.post('/deletemultiplemedicines', function(req, res) {
+router.post('/deletemultiplemedicines/', function(req, res) {
+  //console.log(req.body);
+  console.log('indexjs' + req.body.chk);
+  if(req.body.chk == undefined) return;
+
   MedicineApi.deleteMultipleMedicines(req.body.chk, function(err) {
     res.redirect('/');
   });
 });
-
-/*
-router.post('/deletemultiplemedicines', function(req, res) {
-    var medicinesId = {};
-    MedicineApi.deleteMultipleMedicines(req.body.chk, function(err) {
-      res.send(req.body);
-    });
-  }); */
 
 module.exports = router;
